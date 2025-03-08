@@ -27,7 +27,8 @@ function Steps() {
                 <h4 className="text-3xl text-white my-3">{step.title}</h4>
                 <p className="text-xl">{step.description}</p>
               </div>
-              <div className=""></div>
+              <div className="">
+              </div>
             </>
           ) : (
             <>

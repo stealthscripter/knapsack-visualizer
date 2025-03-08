@@ -5,7 +5,7 @@ function Hero() {
       <p className="text-2xl mb-8 max-w-2xl mx-auto mt-4 text-zinc-300 leading-10">
         Solve complex knapsack problems with our AI-powered algorithm toolkit
       </p>
-    <button className="border border-zinc-200 px-4 py-2 cursor-pointer">Try Now</button>
+    <button className="border border-zinc-200 px-4 py-2 cursor-pointer text-xl hover:bg-zinc-200 hover:text-slate-800 duration-300">Try Now</button>
     </div>
   );
 }

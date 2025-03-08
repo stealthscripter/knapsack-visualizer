@@ -1,5 +1,6 @@
 
 import Hero from '../components/Hero'
+import Knapsack from '../components/Knapsack'
 import NavBar from '../components/NavBar'
 import Steps from '../components/Steps'
 
@@ -9,6 +10,7 @@ function AppLayout() {
         <NavBar />
         <Hero />
         <Steps />
+        <Knapsack />
     </div>
   )
 }

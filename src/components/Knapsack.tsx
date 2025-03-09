@@ -115,13 +115,17 @@ function Knapsack() {
   }
 
   return (
-    <div className="md:mt-40 p-4 col-start-2 col-span-5 grid md:grid-cols-5 my-20 font-josefin">
-      <h1 className="text-center md:text-4xl text-3xl col-span-5">Knapsack Calculator</h1>
-      <p className="md:text-xl text-base leading-9 text-center col-span-5">leave it.</p>
+    <div className="mt-40 md:p-4 col-start-2 col-span-5 md:grid grid-cols-5 font-josefin">
+      <h1 className="text-center md:text-4xl text-3xl col-span-5">
+        Knapsack Calculator
+      </h1>
+      <p className="md:text-xl text-base leading-9 text-center col-span-5">
+        leave it.
+      </p>
 
       <section className="col-start-2 col-span-3">
-        <div className="my-2 p-4 flex justify-center space-x-10">
-          <div className="flex flex-col space-y-1.5">
+        <div className="my-2 p-4 flex flex-col sm:flex-row justify-center space-y-7 sm:space-y-2 sm:space-x-10">
+          <div className="flex flex-col space-y-1.5 w-full sm:w-auto">
             <label htmlFor="items" className="text-zinc-100">
               Number of Items
             </label>
@@ -129,12 +133,12 @@ function Knapsack() {
               type="number"
               min={1}
               id="items"
-              className="border border-zinc-300 py-2 px-4 capitalize"
+              className="border border-zinc-300 py-2 px-4 capitalize w-full sm:w-auto"
               placeholder="number of items"
               onChange={handleRowsChange}
             />
           </div>
-          <div className="flex flex-col space-y-1.5">
+          <div className="flex flex-col space-y-1.5 w-full sm:w-auto">
             <label htmlFor="capacity" className="text-zinc-100">
               Knapsack of Capacity
             </label>
@@ -142,7 +146,7 @@ function Knapsack() {
               type="number"
               min={0}
               id="capacity"
-              className="border border-zinc-300 py-2 px-4 capitalize"
+              className="border border-zinc-300 py-2 px-4 capitalize w-full sm:w-auto"
               placeholder="knapsack capacity"
               value={capacity === 0 ? "" : capacity}
               onChange={(e) => setCapacity(parseInt(e.target.value))}
@@ -151,68 +155,99 @@ function Knapsack() {
         </div>
       </section>
 
-      <section className="col-start-2 col-span-3 flex justify-center items-start">
+      <section className="col-start-2 col-span-3 flex justify-center items-start w-full md:px-0 px-5">
         {items.length >= 1 && (
-          <table className={`table-auto`}>
-            <thead>
-              <tr className="">
-                <th className="text-center text-zinc-300 pt-5 pb-3">Item</th>
-                <th className="text-center text-zinc-300 pt-5 pb-3">Profit</th>
-                <th className="text-center text-zinc-300 pt-5 pb-3">Weight</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {items.map((item, i) => (
-                <tr key={i}>
-                  <td className="border px-4 py-2">Item {i + 1}</td>
-                  <td className="border px-4 py-2">
-                    <input
-                      type="number"
-                      placeholder="value"
-                      min={0}
-                      value={item.profit === 0 ? "" : item.profit}
-                      onChange={handleItemChange(i, "profit")}
-                      className="w-full p-1 outline-none"
-                    />
-                  </td>
-                  <td className="border px-4 py-2">
-                    <input
-                      type="number"
-                      placeholder="value"
-                      min={0}
-                      value={item.weight === 0 ? "" : item.weight}
-                      onChange={handleItemChange(i, "weight")}
-                      className="w-full p-1 outline-none"
-                    />
-                  </td>
+          <div className="w-full overflow-x-auto">
+            <table className="table-auto min-w-full border-collapse">
+              <thead>
+                <tr>
+                  <th className="text-center text-zinc-300 pt-5 pb-3 px-4">
+                    Item
+                  </th>
+                  <th className="text-center text-zinc-300 pt-5 pb-3 px-4">
+                    Profit
+                  </th>
+                  <th className="text-center text-zinc-300 pt-5 pb-3 px-4">
+                    Weight
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+
+              <tbody>
+                {items.map((item, i) => (
+                  <tr key={i}>
+                    <td className="border px-4 py-2 text-center">
+                      Item {i + 1}
+                    </td>
+                    <td className="border px-4 py-2">
+                      <input
+                        type="number"
+                        placeholder="Value"
+                        min={0}
+                        value={item.profit === 0 ? "" : item.profit}
+                        onChange={handleItemChange(i, "profit")}
+                        className="w-full p-1 outline-none bg-transparent text-center"
+                      />
+                    </td>
+                    <td className="border px-4 py-2">
+                      <input
+                        type="number"
+                        placeholder="Value"
+                        min={0}
+                        value={item.weight === 0 ? "" : item.weight}
+                        onChange={handleItemChange(i, "weight")}
+                        className="w-full p-1 outline-none bg-transparent text-center"
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </section>
 
-      <section className="col-start-1 col-end-6 grid grid-cols-5 mt-10 space-x-10">
+      <div className="col-start-3 col-end-4 flex justify-center md:mt-2 space-x-10 md:my-0 my-5">
+        <button
+          onClick={handleCalculate}
+          className="border border-zinc-200 hover:bg-white hover:text-slate-900 duration-300 cursor-pointer px-4 py-2 rounded my-5"
+        >
+          Calculate
+        </button>
+        {result && (
+          <button
+            onClick={handleReset}
+            className="border border-zinc-200 hover:bg-white hover:text-slate-900 duration-300 cursor-pointer px-4 py-2 rounded my-5"
+          >
+            Reset
+          </button>
+        )}
+      </div>
+
+      <section className="grid grid-cols-1 md:grid-cols-5 gap-5 md:mt-10">
         {result && (
           <>
-            {/* 0-1 knapsack */}
-            <div className="col-start-1 col-end-4 text-center border border-amber-900">
+            {/* 0-1 Knapsack */}
+            <div className="md:col-span-3 text-center p-4">
               <h4 className="font-semibold text-2xl my-1">Knapsack 0/1</h4>
               <p className="my-2 text-base">Resultant Table</p>
-              <table className="table-auto w-full">
-                <tbody>
-                  {result.zeroOne.table.map((row, i) => (
-                    <tr key={i}>
-                      {row.map((cell, j) => (
-                        <td key={j} className="border px-2 py-1">
-                          {cell}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+
+              {/* Responsive Table Wrapper */}
+              <div className="overflow-x-auto">
+                <table className="table-auto w-full border-collapse">
+                  <tbody>
+                    {result.zeroOne.table.map((row, i) => (
+                      <tr key={i}>
+                        {row.map((cell, j) => (
+                          <td key={j} className="border px-2 py-1">
+                            {cell}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
 
               <div className="text-center mt-5">
                 <p className="my-2 text-base">Resultant Profit</p>
@@ -227,9 +262,8 @@ function Knapsack() {
               </div>
             </div>
 
-            {/* fractional knapsack */}
-
-            <div className="border border-amber-900 col-span-2">
+            {/* Fractional Knapsack */}
+            <div className="md:col-span-2 p-4">
               <div className="text-center">
                 <h4 className="font-semibold text-2xl my-1">
                   Fractional Knapsack
@@ -253,22 +287,6 @@ function Knapsack() {
           </>
         )}
       </section>
-      <div className="col-start-3 col-end-4 flex justify-center mt-2 space-x-10">
-        <button
-          onClick={handleCalculate}
-          className="border border-zinc-200 hover:bg-white hover:text-slate-900 duration-300 cursor-pointer px-4 py-2 rounded my-5"
-        >
-          Calculate
-        </button>
-        {result && (
-          <button
-            onClick={handleReset}
-            className="border border-zinc-200 hover:bg-white hover:text-slate-900 duration-300 cursor-pointer px-4 py-2 rounded my-5"
-          >
-            Reset
-          </button>
-        )}
-      </div>
     </div>
   );
 }

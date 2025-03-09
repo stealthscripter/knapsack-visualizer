@@ -17,7 +17,7 @@ const steps = [
 
 function Steps() {
   return (
-    <div className="col-start-3 col-span-3 md:mt-52 md:flex flex-col space-y-24">
+    <div className="col-start-3 col-span-3 md:mt-52 md:flex flex-col md:space-y-24 space-y-20 px-5 md:px-0" >
       {/* step 1 */}
 
       {steps.map((step, index) => (

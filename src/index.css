@@ -13,3 +13,12 @@ input[type='number'] {
   input[type='number']::-webkit-inner-spin-button {
     @apply appearance-none m-0;
   }
+
+  body {
+    min-height: 100vh;
+  }
+  body {
+    background-color: #111; /* Match your theme */
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+    

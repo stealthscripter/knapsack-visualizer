@@ -22,3 +22,9 @@ input[type='number'] {
     padding-bottom: env(safe-area-inset-bottom);
   }
     
+
+
+/* Add to your global CSS file */
+html {
+  scroll-behavior: smooth;
+}

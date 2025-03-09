@@ -115,7 +115,7 @@ function Knapsack() {
   }
 
   return (
-    <div className="mt-40 md:p-4 col-start-2 col-span-5 md:grid grid-cols-5 font-josefin">
+    <div className="mt-40 md:p-4 col-start-2 col-span-5 md:grid grid-cols-5 font-josefin" id="knapsack">
       <h1 className="text-center md:text-4xl text-3xl col-span-5">
         Knapsack Calculator
       </h1>
@@ -224,17 +224,15 @@ function Knapsack() {
         )}
       </div>
 
-      <section className="grid grid-cols-1 md:grid-cols-5 gap-5 md:mt-10">
+      <section className="col-start-1 col-end-6 grid md:grid-cols-5 grid-cols-1 mt-10 md:space-x-10 mb-16">
         {result && (
           <>
-            {/* 0-1 Knapsack */}
-            <div className="md:col-span-3 text-center p-4">
+            {/* 0-1 knapsack */}
+            <div className="col-start-1 col-end-4 text-center md:mb-0 mb-10">
               <h4 className="font-semibold text-2xl my-1">Knapsack 0/1</h4>
               <p className="my-2 text-base">Resultant Table</p>
-
-              {/* Responsive Table Wrapper */}
               <div className="overflow-x-auto">
-                <table className="table-auto w-full border-collapse">
+                <table className="table-auto w-full">
                   <tbody>
                     {result.zeroOne.table.map((row, i) => (
                       <tr key={i}>
@@ -249,7 +247,7 @@ function Knapsack() {
                 </table>
               </div>
 
-              <div className="text-center mt-5">
+              <div className="text-center mt-5 ">
                 <p className="my-2 text-base">Resultant Profit</p>
                 <h4 className="text-4xl">{result.zeroOne.maxProfit}</h4>
               </div>
@@ -262,8 +260,9 @@ function Knapsack() {
               </div>
             </div>
 
-            {/* Fractional Knapsack */}
-            <div className="md:col-span-2 p-4">
+            {/* fractional knapsack */}
+
+            <div className="col-span-2">
               <div className="text-center">
                 <h4 className="font-semibold text-2xl my-1">
                   Fractional Knapsack

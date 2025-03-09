@@ -1,4 +1,3 @@
-import KnapsackApp from "./KnapsackApp"
 import AppLayout from "./layout/AppLayout"
 
 function App() {

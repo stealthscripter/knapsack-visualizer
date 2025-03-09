@@ -169,15 +169,10 @@ const KnapsackApp = () => {
 
       {result && (
         <div className="mt-8">
-          <h2 className="text-xl font-bold mb-4">Results</h2>
+          <h2 className="text-6xl font-bold mb-4">Results</h2>
           
-          <div className="mb-4">
-            <h3 className="text-lg font-semibold">Fractional Knapsack</h3>
-            <p>Max Profit: {result.fractional.maxProfit.toFixed(2)}</p>
-            <p>Solution: {result.fractional.solution.join(", ")}</p>
-          </div>
 
-          <div>
+          <div className="border border-amber-500">
             <h3 className="text-lg font-semibold">0/1 Knapsack</h3>
             <p>Max Profit: {result.zeroOne.maxProfit}</p>
             <p>Solution: {result.zeroOne.solution.join(", ")}</p>

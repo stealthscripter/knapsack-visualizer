@@ -1,5 +1,4 @@
 import { useState } from "react";
-import KnapsackApp from "../KnapsackApp";
 type Item = {
   profit: number;
   weight: number;
@@ -109,28 +108,46 @@ function Knapsack() {
     return { maxProfit: dp[n][capacity], solution, table: dp };
   };
 
+  function handleReset() {
+    setItems([]);
+    setCapacity(0);
+    setResult(null);
+  }
+
   return (
-    <div className="mt-40 border border-zinc-400 p-4 col-start-2 col-span-5 grid grid-cols-5 my-20 font-josefin">
-      <h1 className="text-center text-4xl col-span-5">Knapsack Calculator</h1>
-      <p className="text-xl leading-9 text-center col-span-5">leave it.</p>
+    <div className="md:mt-40 p-4 col-start-2 col-span-5 grid md:grid-cols-5 my-20 font-josefin">
+      <h1 className="text-center md:text-4xl text-3xl col-span-5">Knapsack Calculator</h1>
+      <p className="md:text-xl text-base leading-9 text-center col-span-5">leave it.</p>
 
       <section className="col-start-2 col-span-3">
         <div className="my-2 p-4 flex justify-center space-x-10">
-          <input
-            type="number"
-            min={1}
-            className="border border-zinc-300 py-2 px-4 capitalize"
-            placeholder="number of items"
-            onChange={handleRowsChange}
-          />
-          <input
-            type="number"
-            min={0}
-            className="border border-zinc-300 py-2 px-4 capitalize"
-            placeholder="knapsack capacity"
-            value={capacity === 0 ? "" : capacity}
-            onChange={(e) => setCapacity(parseInt(e.target.value))}
-          />
+          <div className="flex flex-col space-y-1.5">
+            <label htmlFor="items" className="text-zinc-100">
+              Number of Items
+            </label>
+            <input
+              type="number"
+              min={1}
+              id="items"
+              className="border border-zinc-300 py-2 px-4 capitalize"
+              placeholder="number of items"
+              onChange={handleRowsChange}
+            />
+          </div>
+          <div className="flex flex-col space-y-1.5">
+            <label htmlFor="capacity" className="text-zinc-100">
+              Knapsack of Capacity
+            </label>
+            <input
+              type="number"
+              min={0}
+              id="capacity"
+              className="border border-zinc-300 py-2 px-4 capitalize"
+              placeholder="knapsack capacity"
+              value={capacity === 0 ? "" : capacity}
+              onChange={(e) => setCapacity(parseInt(e.target.value))}
+            />
+          </div>
         </div>
       </section>
 
@@ -176,11 +193,11 @@ function Knapsack() {
         )}
       </section>
 
-      <section className="col-start-1 col-end-6 grid grid-cols-5  border mt-10">
+      <section className="col-start-1 col-end-6 grid grid-cols-5 mt-10 space-x-10">
         {result && (
           <>
             {/* 0-1 knapsack */}
-            <div className="col-start-1 col-end-3 text-center">
+            <div className="col-start-1 col-end-4 text-center border border-amber-900">
               <h4 className="font-semibold text-2xl my-1">Knapsack 0/1</h4>
               <p className="my-2 text-base">Resultant Table</p>
               <table className="table-auto w-full">
@@ -196,28 +213,61 @@ function Knapsack() {
                   ))}
                 </tbody>
               </table>
+
+              <div className="text-center mt-5">
+                <p className="my-2 text-base">Resultant Profit</p>
+                <h4 className="text-4xl">{result.zeroOne.maxProfit}</h4>
+              </div>
+
+              <div className="text-center mt-5">
+                <p className="my-2 text-base">Resultant Solution</p>
+                <h4 className="text-4xl">
+                  {result.zeroOne.solution.join(", ")}
+                </h4>
+              </div>
             </div>
 
             {/* fractional knapsack */}
 
-            <div className="text-center">
-              <h3 className="text-lg font-semibold">Fractional Knapsack</h3>
-              <p>Max Profit: {result.fractional.maxProfit.toFixed(2)}</p>
-              <p>Solution: {result.fractional.solution.join(", ")}</p>
+            <div className="border border-amber-900 col-span-2">
+              <div className="text-center">
+                <h4 className="font-semibold text-2xl my-1">
+                  Fractional Knapsack
+                </h4>
+              </div>
 
-              <h3 className="text-lg font-semibold">0/1 Knapsack</h3>
-    
+              <div className="text-center mt-5">
+                <p className="my-2 text-base">Resultant Profit</p>
+                <h4 className="text-4xl">
+                  {result.fractional.maxProfit.toFixed(2)}
+                </h4>
+              </div>
+
+              <div className="text-center mt-5">
+                <p className="my-2 text-base">Resultant Solution</p>
+                <h4 className="text-4xl">
+                  {result.fractional.solution.join(", ")}
+                </h4>
+              </div>
             </div>
           </>
         )}
       </section>
-      <div className="col-start-3 col-end-4 flex justify-center mt-5">
+      <div className="col-start-3 col-end-4 flex justify-center mt-2 space-x-10">
         <button
           onClick={handleCalculate}
           className="border border-zinc-200 hover:bg-white hover:text-slate-900 duration-300 cursor-pointer px-4 py-2 rounded my-5"
         >
           Calculate
         </button>
+        {result && (
+          <button
+            onClick={handleReset}
+            className="border border-zinc-200 hover:bg-white hover:text-slate-900 duration-300 cursor-pointer px-4 py-2 rounded my-5"
+          >
+            Reset
+          </button>
+        )}
       </div>
     </div>
   );
